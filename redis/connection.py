@@ -123,6 +123,13 @@ class Encoder(object):
         "Return a unicode string from the byte representation"
         if (self.decode_responses or force) and isinstance(value, bytes):
             value = value.decode(self.encoding, self.encoding_errors)
+            # patch
+            if value == 'None':
+                return None
+            elif value == 'False':
+                return False
+            elif value == 'True':
+                return True
         return value
 
 
